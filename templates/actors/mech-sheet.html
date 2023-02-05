@@ -1,0 +1,151 @@
+<form class="{{cssClass}} -m-2 p-2 form-sheet">
+  {{#if actor.limited}}
+    {{>
+    "systems/swnr/templates/actors/fragments/limited-sheet.html"
+    actor=actor
+    }}
+  {{else}}
+  <div>
+    <div class="flex flex-col gap-2">
+      <!-- Grid div for header -->
+      <div class="flex-grow grid grid-cols-6 items-center gap-1">
+        <div class="name  row-span-2 flex flex-col items-center">
+          <img class="profile-img w-24 h-24 object-contain" src="{{actor.img}}" title="{{actor.name}}"
+            data-edit="img" />
+        </div>
+
+        <!-- name -->
+        <div class="name col-span-2 flex flex-col items-center">
+          <input name="name"
+            class="text-2xl col-span-2 px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+            type="text" value="{{actor.name}}" placeholder="{{localize 'swnr.sheet.name'}}" />
+          <span>{{localize 'swnr.sheet.mech.name'}}</span>
+        </div>
+
+
+        <div class="cargo flex flex-col justify-center items-center">
+          <input name="data.mechHullType"
+            class="col-span-2 px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75  rounded-md"
+            type="text" value="{{actor.data.data.mechHullType}}" />
+          <span>{{localize 'swnr.sheet.mech.mech-hull'}}</span>
+        </div>
+
+        <!-- Ship /  class -->
+        <div class="cargo flex flex-col justify-center items-center">
+          <select name="data.mechClass"
+            class="border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md">
+            {{#select actor.data.data.mechClass}}
+            <option value="suit">
+              {{localize 'swnr.sheet.mech.mechClass.suit'}}
+            </option>
+            <option value="light">{{localize 'swnr.sheet.mech.mechClass.light'}}</option>
+            <option value="heavy">{{localize 'swnr.sheet.mech.mechClass.heavy'}}</option>
+            {{/select}}
+          </select>
+          {{localize 'swnr.sheet.mech.mech-class'}}
+        </div>
+
+        {{>
+         "systems/swnr/templates/actors/fragments/hdr-HAA.html" 
+          type=actor.type actor=actor
+        }}
+
+       {{>
+         "systems/swnr/templates/actors/fragments/hdr-PMH.html" 
+          type=actor.type actor=actor
+       }}
+
+        <!--speed-->
+        <div class="mass flex flex-col justify-center items-center">
+          <div class="border border-gray-800 bg-gray-400 mx-auto rounded-md">
+            <input
+              class="w-8 text-center pl-0.5 py-3.5 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+              type="number" step="1" name="data.speed" value="{{actor.data.data.speed}}" data-dtype="Number" min="0" />
+          </div>
+          <label
+            class="hp-label hover:text-shadow hover:text-shadow-blueGray-600 cursor-pointer transition-text-shadow">
+            {{localize 'swnr.sheet.ship.speed'}}
+          </label>
+        </div>
+
+        <!--maint-->
+        <div class="mass flex flex-col justify-center items-center">
+          <div class="border border-gray-800 bg-gray-400 mx-auto rounded-md">
+            <input
+              class="w-20 text-center pl-0.5 py-3.5 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+              type="number" step="1" name="data.maintenanceCost" value="{{actor.data.data.maintenanceCost}}" data-dtype="Number" min="0" />
+          </div>
+          <label
+            class="hp-label hover:text-shadow hover:text-shadow-blueGray-600 cursor-pointer transition-text-shadow">
+            {{localize 'swnr.sheet.ship.maintenance-cost'}}
+          </label>
+        </div>
+
+        <!--cost-->
+        <div class="mass flex flex-col justify-center items-center">
+          <div class="border border-gray-800 bg-gray-400 mx-auto rounded-md">
+            <input
+              class="w-20 text-center pl-0.5 py-3.5 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+              type="number" step="1" name="data.cost" value="{{actor.data.data.cost}}" data-dtype="Number" min="0" />
+          </div>
+          <label
+            class="hp-label hover:text-shadow hover:text-shadow-blueGray-600 cursor-pointer transition-text-shadow">
+            {{localize 'swnr.sheet.ship.cost'}}
+          </label>
+        </div>
+
+        <!--pilot-->
+        <div class="mass flex flex-col justify-center items-center">
+          <div class="border item border-gray-800 bg-gray-400 mx-auto rounded-md" data-crew-id="{{pilot.id}}" data-crew-name="{{pilot.name}}">
+            <input
+              class="w-20 crew-show text-center pl-0.5 py-0.5 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+               value="{{pilot.name}}" readonly />
+            {{#if pilot}}
+            <a class="item-control mr-1 crew-roll text-gray-400 hover:text-purple-600 transition-colors" title='{{localize 'swnr.sheet.roll-skill'}}'><i
+              class="fas fa-dice"></i></a>
+            <a class="item-control mr-1 crew-delete text-gray-400 hover:text-red-600 transition-colors" title='{{localize 'swnr.sheet.delete-item'}}'><i
+              class="fas fa-trash"></i></a>
+            {{/if}}
+          </div>
+          <label
+            class="hp-label hover:text-shadow hover:text-shadow-blueGray-600 cursor-pointer transition-text-shadow">
+            {{localize 'swnr.sheet.mech.pilot'}}  
+          </label>
+        </div>
+    </div> <!-- end grid div for header -->
+          {{!-- Sheet Body --}}
+
+      <div class="w-full">
+        <nav 
+          class="pc-sheet-tabs tabs py-1 flex flex-wrap gap-2 border-t border-b border-l border-r border-blueGray-900 border0 mb-1 bg-blueGray-800 text-gray-100"
+          data-group="primary">
+          <a class="item" data-tab="mods">
+            {{localize 'swnr.sheet.ship.weapons-tab'}}
+          </a>
+          <a class="item" data-tab="notes">
+            {{localize 'swnr.sheet.ship.notes-tab'}}
+          </a>          
+        </nav>
+
+        <section class="sheet-body">
+          <div class="tab mods min-h-full" data-group="primary" data-tab="mods">
+            {{>
+              "systems/swnr/templates/actors/fragments/vehicle-mods.html" 
+                type=actor.type actor=actor
+            }}
+          </div>
+          <!-- notes --> 
+          <div class="tab shipnotes min-h-full" data-group="primary" data-tab="notes">
+            <div class="flex flex-col">
+            {{>
+              "systems/swnr/templates/actors/fragments/vehicle-notes.html" 
+                type=actor.type actor=actor
+            }}
+            </div>
+          </div> <!-- end notes tab-->
+        </section>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</form>

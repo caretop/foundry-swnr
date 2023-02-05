@@ -1,0 +1,39 @@
+              <div class="gap-2">
+                <div>
+                  <li class="item-titles flexrow">
+                    <!--<div class="item-caret"><i class="fas fa-caret-down"></i></div>-->
+                    <div class="item-name">{{localize 'swnr.sheet.ship.crew-name'}} </div>
+                    <div class="item-controls">
+                    </div>
+                  </li>
+                  <ol class="item-list">
+                    {{#each crewArray as | crew id| }}
+                    <li class="item-entry">
+                      <div class="item flexrow" data-crew-id="{{crew.id}}" data-crew-name="{{crew.name}}">
+                        <div class="item-name flexrow">
+                          <a class="crew-show">{{crew.name}}</a>
+                        </div>
+                        <div class="item-controls">
+                          <a class="item-control mr-1 crew-roll text-gray-400 hover:text-purple-600 transition-colors" title='{{localize 'swnr.sheet.roll-skill'}}'><i
+                              class="fas fa-dice"></i></a>
+                          <a class="item-control crew-delete text-gray-400 hover:text-red-600 transition-colors" title='{{localize 'swnr.sheet.delete-item'}}'><i
+                              class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                  </ol>
+                </div>
+                {{#if (eq type "ship")}}
+                <div class="pt-2 border-t border-trueGray-500 border1">
+                  {{localize 'swnr.sheet.ship.crew-skill-bonus'}}:
+                  <input
+                    class="w-10 text-center px-1.5 py-0.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+                    type="number" min="0" name="data.crewSkillBonus" value="{{actor.data.data.crewSkillBonus}}" />
+                    <a class="item-control mr-1 npc-crew-roll text-gray-400 hover:text-purple-600 transition-colors" title='{{localize 'swnr.sheet.roll-skill'}}'><i
+                              class="fas fa-dice"></i></a>
+                    <span class="text-gray-400">
+                    {{localize 'swnr.sheet.ship.crew-skill-bonus-note'}}                      
+                    </span>
+                </div>
+                {{/if}}
+              </div>

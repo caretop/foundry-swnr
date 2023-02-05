@@ -1,0 +1,535 @@
+{
+  "Actor": {
+    "types": [
+      "character",
+      "npc",
+      "ship",
+      "mech",
+      "drone",
+      "vehicle",
+      "faction"
+    ],
+    "templates": {
+      "vehiclebase": {
+        "cost": 0,
+        "health": {
+          "value": 15,
+          "max": 15
+        },
+        "ac": 10,
+        "speed": 1,
+        "armor": {
+          "value": 1,
+          "max": 1
+        },
+        "crew": {
+          "min": 1,
+          "max": 1,
+          "current": 0
+        },
+        "crewMembers": [],
+        "tl": 4,
+        "description": "",
+        "mods": ""
+      },
+      "living": {
+        "health": {
+          "value": 10,
+          "max": 10
+        },
+        "baseAc": 10,
+        "rangedAC":10,
+        "meleeAC":10,
+        "hitDie": "d6",
+        "soak": {
+          "value": 0,
+          "max": 0
+        },
+        "speed": 10,
+        "ab": 0,
+        "systemStrain": {
+          "value": 0,
+          "permanent": 0
+        },
+        "effort": {
+          "bonus": 0,
+          "current": 0,
+          "scene": 0,
+          "day": 0
+        }
+      },
+      "encumbrance": {
+        "encumbrance": {
+          "stowed": {
+            "value": "number",
+            "max": "number"
+          },
+          "ready": {
+            "value": "number",
+            "max": "number"
+          }
+        }
+      },
+      "stats": {
+        "stats": {
+          "str": {
+            "base": 10,
+            "bonus": 0,
+            "boost": 0,
+            "temp": 0
+          },
+          "dex": {
+            "base": 10,
+            "bonus": 0,
+            "boost": 0,
+            "temp": 0
+          },
+          "con": {
+            "base": 10,
+            "bonus": 0,
+            "boost": 0,
+            "temp": 0
+          },
+          "int": {
+            "base": 10,
+            "bonus": 0,
+            "boost": 0,
+            "temp": 0
+          },
+          "wis": {
+            "base": 10,
+            "bonus": 0,
+            "boost": 0,
+            "temp": 0
+          },
+          "cha": {
+            "base": 10,
+            "bonus": 0,
+            "boost": 0,
+            "temp": 0
+          }
+        }
+      }
+    },
+    "character": {
+      "templates": [
+        "living",
+        "stats",
+        "encumbrance"
+      ],
+      "level": {
+        "value": 1,
+        "exp": 0,
+        "expToLevel": 3
+      },
+      "goals": [],
+      "class": "",
+      "species": "",
+      "homeworld": "",
+      "background": "",
+      "employer": "",
+      "biography": "",
+      "credits": {
+        "debt": 0,
+        "balance": 0,
+        "owed": 0
+      },
+      "unspentSkillPoints": 0,
+      "unspentPsySkillPoints": 0,
+      "tweak": {
+        "advInit": false,
+        "quickSkill1": "",
+        "quickSkill2": "",
+        "quickSkill3": "",
+        "extraEffortName": "",
+        "extraEffort": {
+          "bonus": 0,
+          "current": 0,
+          "scene": 0,
+          "day": 0,
+          "max": 0
+        },
+        "debtDisplay": "Debt",
+        "owedDisplay": "Owed",
+        "balanceDisplay": "Balance",
+        "resourceList": [],
+        "showResourceList": false
+      }
+    },
+    "npc": {
+      "templates": [
+        "living"
+      ],
+      "skillBonus": 0,
+      "attacks": {
+        "bonusDamage": 0,
+        "number": 1
+      },
+      "hitDice": 0,
+      "armorType": "street",
+      "moralScore": 6,
+      "saves": 15,
+      "effort": {
+        "value": 0,
+        "max": 0
+      },
+      "reaction": "unknown",
+      "homeworld": "",
+      "faction": "",
+      "notes": {
+        "left": {
+          "label": "Goals",
+          "contents": ""
+        },
+        "right": {
+          "label": "Bio/Notes",
+          "contents": ""
+        }
+      }
+    },
+    "faction": {
+      "description": "",
+      "health": {
+        "value": 7
+      },
+      "forceRating": 1,
+      "cunningRating": 1,
+      "wealthRating": 1,
+      "facCreds": 0,
+      "xp": 0,
+      "homeworld": "",
+      "active": true,
+      "factionGoal": "",
+      "factionGoalDesc": "",
+      "tags": [],
+      "log": []
+    },
+    "ship": {
+      "templates": [
+        "vehiclebase"
+      ],
+      "power": {
+        "max": 1
+      },
+      "mass": {
+        "value": 1,
+        "max": 1
+      },
+      "hardpoints": {
+        "value": 1,
+        "max": 1
+      },
+      "lifeSupportDays": {
+        "value": 1,
+        "max": 1
+      },
+      "fuel": {
+        "value": 1,
+        "max": 1
+      },
+      "cargo": {
+        "value": 10,
+        "max": 10
+      },
+      "spikeDrive": {
+        "value": 1,
+        "max": 1
+      },
+      "shipClass": "frigate",
+      "shipHullType": "shuttle",
+      "description": "",
+      "mods": "None",
+      "operatingCost": 0,
+      "maintenanceCost": 0,
+      "amountOwed": 0,
+      "paymentAmount": 0,
+      "paymentMonths": 1,
+      "maintenanceMonths": 6,
+      "creditPool": 0,
+      "lastMaintenance": {
+        "year": 3200,
+        "month": 1,
+        "day": 1
+      },
+      "lastPayment": {
+        "year": 3200,
+        "month": 1,
+        "day": 1
+      },
+      "roles": {
+        "captain": "",
+        "gunnery": "",
+        "engineering": "",
+        "comms": "",
+        "bridge": ""
+      },
+      "cargoCarried": [],
+      "commandPoints": 0,
+      "npcCommandPoints": 0,
+      "crewSkillBonus": 0,
+      "actionsTaken": [],
+      "supportingDept": ""
+    },
+    "mech": {
+      "templates": [
+        "vehiclebase"
+      ],
+      "power": {
+        "max": 1
+      },
+      "mass": {
+        "max": 1
+      },
+      "hardpoints": {
+        "max": 1
+      },
+      "maintenanceCost": 0,
+      "mechClass": "suit",
+      "mechHullType": "Mech Hull Type"
+    },
+    "drone": {
+      "templates": [
+        "vehiclebase"
+      ],
+      "fittings": {
+        "max": 1
+      },
+      "enc": 2,
+      "range": "500m",
+      "model": ""
+    },
+    "vehicle": {
+      "templates": [
+        "vehiclebase"
+      ],
+      "power": {
+        "max": 1
+      },
+      "mass": {
+        "max": 1
+      },
+      "hardpoints": {
+        "max": 1
+      },
+      "kmph": 100,
+      "tonnage": 10,
+      "size": "s"
+    }
+  },
+  "Item": {
+    "types": [
+      "class",
+      "armor",
+      "weapon",
+      "power",
+      "focus",
+      "item",
+      "cyberware",
+      "skill",
+      "shipWeapon",
+      "shipDefense",
+      "shipFitting",
+      "asset"
+    ],
+    "templates": {
+      "modBase": {
+        "pretech": {
+          "cost": 0,
+          "perHull": false
+        }
+      },
+      "baseItem": {
+        "encumbrance": 0,
+        "cost": 0,
+        "tl": 4,
+        "quality": "stock",
+        "location": "other",
+        "favorite": false
+      },
+      "description": {
+        "description": ""
+      },
+      "baseVehicleItem": {
+        "cost": 0,
+        "power": 1,
+        "mass": 1,
+        "broken": false,
+        "destroyed": false,
+        "juryRigged": false,
+        "costMultiplier": false,
+        "powerMultiplier": false,
+        "massMultiplier": false,
+        "type": "ship",
+        "minClass": "fighter"
+      }
+    },
+    "class": {
+      "templates": [
+        "description"
+      ]
+    },
+    "armor": {
+      "templates": [
+        "baseItem",
+        "description"
+      ],
+      "rangedAc": 10,
+      "meleeAc":10,
+      "soak":0,
+      "type": "street",
+      "use": false,
+      "shield": false,
+      "quantity": 1
+    },
+    "weapon": {
+      "templates": [
+        "baseItem",
+        "description"
+      ],
+      "stat": "dex",
+      "secondStat": "none",
+      "skill": "",
+      "skillBoostsDamage": false,
+      "skillBoostsShock": false,
+      "shock": {
+        "dmg": 0,
+        "ac": 15
+      },
+      "ab": 0,
+      "ammo": {
+        "longReload": false,
+        "suppress": false,
+        "type": "none",
+        "max": 0,
+        "value": 0,
+        "burst": false
+      },
+      "range": {
+        "normal": 1,
+        "max": 2
+      },
+      "damage": "d4",
+      "quantity": 1,
+      "save": null,
+      "traumaDie":"d6",
+      "traumaRating": 2
+    },
+    "power": {
+      "templates": [
+        "description"
+      ],
+      "source": "",
+      "level": 0,
+      "roll": "",
+      "save": null,
+      "range": "",
+      "skill": null,
+      "prepared": true,
+      "effort": null
+    },
+    "item": {
+      "templates": [
+        "baseItem",
+        "description"
+      ],
+      "bundle": {
+        "amount": 1,
+        "bundled": false
+      },
+      "quantity": 1
+    },
+    "focus": {
+      "templates": [
+        "description"
+      ],
+      "level1": "",
+      "level2": "",
+      "level": 1
+    },
+    "shipWeapon": {
+      "templates": [
+        "description",
+        "baseVehicleItem"
+      ],
+      "damage": "d4",
+      "ab": 0,
+      "hardpoint": 1,
+      "qualities": "",
+      "ammo": {
+        "type": "none",
+        "max": 0,
+        "value": 0
+      }
+    },
+    "shipDefense": {
+      "templates": [
+        "description",
+        "baseVehicleItem"
+      ],
+      "effect": ""
+    },
+    "shipFitting": {
+      "templates": [
+        "description",
+        "baseVehicleItem"
+      ],
+      "effect": ""
+    },
+    "modItem": {
+      "templates": [
+        "description",
+        "modBase"
+      ]
+    },
+    "modShip": {
+      "templates": [
+        "description",
+        "modBase"
+      ]
+    },
+    "asset": {
+      "templates": [
+        "description"
+      ],
+      "health": {
+        "value": 1,
+        "max": 1
+      },
+      "cost": 1,
+      "rating": 1,
+      "baseOfInfluence": false,
+      "tl": 0,
+      "attackTarget": "",
+      "attackSource": "",
+      "attackDamage": "",
+      "counter": "",
+      "note": "",
+      "turnRoll": "",
+      "assetType": "cunning",
+      "location": "",
+      "maintenance": 0,
+      "income": 0,
+      "unusable": false,
+      "stealthed": false
+    },
+    "skill": {
+      "templates": [
+        "description"
+      ],
+      "rank": -1,
+      "defaultStat": "ask",
+      "pool": "2D6",
+      "source": ""
+    },
+    "cyberware": {
+      "templates": [
+        "description"
+      ],
+      "tl": 4,
+      "strain": 0,
+      "cost": 0,
+      "effect": "",
+      "disabled": false
+    }
+  }
+}

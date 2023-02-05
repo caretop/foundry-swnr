@@ -1,0 +1,66 @@
+<div class="chat-card">
+  <h3 title="{{ power.data.data.description }}">{{ power.name }}</h3>
+
+  <div class="chat-desc">
+    {{#if (wouldTrim power.data.data.description 200)}}
+      <span class="hiddenShort">
+        {{{trim power.data.data.description 200}}}
+        <div class="border border-gray-700 placeholder-blue-800 pt-0">
+          <button class="longShowDesc">Show Long Desc.</button>
+        </div>
+      </span>
+      <div class="border border-gray-700 placeholder-blue-800 pt-0">
+        <span style="display:none" class="hiddenLong">
+        {{{ power.data.data.description }}}
+        <button class="longHideDesc">Hide Long Desc.</button>
+        </span>
+      </div>
+    {{else}}
+      <span>
+        {{{power.data.data.description }}}
+      </span>
+    {{/if}}
+  </div>
+
+  {{#if power.data.data.range}}
+      <div >
+        {{localize 'swnr.sheet.powers.range'}}: {{ power.data.data.range }}
+      </div>
+  {{/if}}
+
+  {{#if power.data.data.duration}}
+      <div >
+        {{localize 'swnr.sheet.powers.duration'}}: {{ power.data.data.duration }}
+      </div>
+  {{/if}}
+
+  {{#if power.data.data.roll}}
+    <span>{{localize 'swnr.sheet.powers.roll'}}:</span>
+    <span class="roll roll-damage">{{{ powerRoll }}}</span>
+  {{/if}}
+
+  {{#if power.data.data.save}}
+  <div class="card-buttons">
+      <button data-action="save" data-save="{{power.data.data.save}}">
+          Save {{power.data.data.save}}
+      </button>
+  </div>
+  {{/if}}
+
+  {{#if power.data.data.skill}}
+  <div class="card-buttons">
+      <button data-action="skill" data-skill="{{power.data.data.skill}}">
+          {{power.data.data.skill}}
+      </button>
+  </div>
+  {{/if}}
+
+
+  {{#if power.data.data.effort}}
+  <div class="card-buttons">
+      <button data-action="effort" data-effort="{{power.data.data.effort}}">
+          Use {{power.data.data.effort}} effort
+      </button>
+  </div>
+  {{/if}}
+</div>

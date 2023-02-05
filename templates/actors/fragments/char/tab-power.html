@@ -1,0 +1,151 @@
+<div class="tab foci min-w-full" data-group="primary" data-tab="powers">
+  <div class="flex flex-wrap gap-2 min-w-full"> <!-- wrapper for sections-->
+    <div class="flex flex-col  min-w-full">
+      <div class=" cyberware pr-0.5">
+        <div><!-- table-->
+            <li class="item-titles flexrow">
+              <!--<div class="item-caret"><!--<i class="fas fa-caret-down"></i></div>-->
+              <div class="item-name pr-2.0">{{localize 'swnr.sheet.cyberware.name'}} </div>
+              <div class="item-strain text-center">{{localize 'swnr.sheet.cyberware.strain'}} </div>
+              
+              <div class="item-effect pr-2.0">{{localize 'swnr.sheet.description'}}</div>
+              <div class="item-controls flex-shrink text-right">
+                <a class="item-control item-search text-gray-100 hover:text-green-400 transition-colors"
+                  title="{{localize 'swnr.sheet.search-item'}}" data-item-type="cyberware"  data-item-name="Cyberware">
+                  <i class="fas fa-search"></i>
+                </a> 
+                <a class="item-control item-create text-gray-100 hover:text-green-400 transition-colors"
+                  title="{{localize 'swnr.sheet.add-item'}}" data-item-type="cyberware" data-item-name="Cyberware">
+                  <i class="fas fa-plus"></i>
+                </a> 
+              </div>
+            </li>
+            <ol class="item-list">
+              {{#each itemTypes.cyberware as |item id|}}
+              <li class="item-entry">
+                <div class="item flexrow py-3.0" data-item-id="{{item.id}}">
+                  <div class="item-image" style="background-image: url({{item.img}})"><a></a></div>
+                  <div class="item-name item-click item-rollable flexrow pr-2.0">                
+                    <a>{{item.name}}</a>
+                  </div>
+                  <div class="item  text-center">
+                    {{item.data.data.strain}}
+                  </div>
+                  <div class="item pr-2.0">
+                    {{item.data.data.effect}}
+                  </div>
+                  <div class="item-controls text-right flex-shrink">
+                    <a class="item-control item-edit text-gray-400 hover:text-purple-800 transition-colors" title='{{localize 'swnr.sheet.edit-item'}}'>
+                      <i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete text-gray-400 hover:text-red-600 transition-colors" title='{{localize 'swnr.sheet.delete-item'}}'><i
+                        class="fas fa-trash"></i></a>
+                  </div>
+              </li>
+              {{/each}}
+            </ol>
+        </div><!--end table-->
+      </div>
+      <div class="flex-grow flexrow">
+        {{!-- Old Powers. Leaving to maybe gate on flag.
+        <h4 class="text-lg underline">
+          {{localize 'swnr.sheet.tabs.powers'}}
+        </h4>
+        <div class="flex gap-1 flex-col">
+          {{#each itemTypes.power as |item id|}} {{>
+          "systems/swnr/templates/actors/fragments/power.html" item=item
+          type=actor.type}} {{/each}}
+        </div> --}}
+        <div class="flex2 powers-list pr-0.5 mt-8">
+          <li class="item-titles flexrow">
+            <!--<div class="item-caret"><!--<i class="fas fa-caret-down"></i></div>-->
+            <div class="item-name pr-2.0">{{localize 'swnr.sheet.power'}} </div>
+            <div class="item-source text-center">{{localize 'swnr.sheet.source'}} </div>
+            <div class="item-level pr-2.0 text-center">{{localize 'swnr.sheet.level'}}</div>
+            <div class="item-controls text-right flex-shrink">
+              <a class="item-control item-search text-gray-100 hover:text-green-400 transition-colors"
+                title="{{localize 'swnr.sheet.search-item'}}" data-item-type="power"  data-item-name="Power">
+                <i class="fas fa-search"></i>
+              </a> 
+              <a class="item-control item-create text-gray-100 hover:text-green-400 transition-colors"
+                title="{{localize 'swnr.sheet.add-item'}}" data-item-type="power"  data-item-name="Power">
+                <i class="fas fa-plus"></i>
+              </a> 
+            </div>
+          </li>
+          <ol class="item-list">
+          {{#each actor.data.data.powers as |pwr i|}}
+            <li class="item-entry">
+              <div class="item flexrow py-3.0" data-item-id="{{pwr.id}}">
+                <div class="item-name item-click item-rollable flexrow pr-2.0">                
+                  <a>{{pwr.name}}</a>
+                </div>
+                <div class="item  text-center" style="text-transform: capitalize;">
+                  {{pwr.data.data.source}}
+                </div>
+                <div class="item pr-2.0 text-center">
+                  {{pwr.data.data.level}}
+                </div>
+                <div class="item-controls text-center flex-shrink text-gray-400 hover:text-purple-800 transition-colors">
+                  <a class="item-control item-edit" title='{{localize 'swnr.sheet.edit-item'}}'>
+                    <i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete text-gray-400 hover:text-red-600 transition-colors" title='{{localize 'swnr.sheet.delete-item'}}'><i
+                      class="fas fa-trash"></i></a>
+                </div>
+              </li>
+          {{/each}}
+        </div>
+        {{#if actor.data.data.tweak.showResourceList}}
+        <div class="resource-list mt-8">
+            <li class="item-titles flexrow">
+            <!--<div class="item-caret"><!--<i class="fas fa-caret-down"></i></div>-->
+            <div class="item-name pr-2.0">{{localize 'swnr.sheet.resources'}} </div>
+            <div class="item-level pr-2.0 text-center"></div>
+            <div class="item-controls text-right flex-shrink">
+              <a class="item-control resource-create text-gray-100 hover:text-green-400 transition-colors"
+                title="{{localize 'swnr.sheet.add-item'}}">
+                <i class="fas fa-plus"></i>
+              </a> 
+            </div>
+          </li>
+          <ol class="item-list">
+          {{#each actor.data.data.tweak.resourceList as |item id|}}
+          <li class="item-entry">
+            <div class="item flexrow" data-rl-idx="{{id}}">
+                <input
+                  class="resource-list-val w-20 mr-1 text-center p-0.5 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+                  name="resourceList-name-{{id}}"
+                  value="{{item.name}}"
+                  data-rl-type="name"
+                /> 
+
+                <input
+                  class="resource-list-val w-4 text-center  bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+                  type="number"
+                  name="resourceList-value-{{id}}"
+                  value="{{item.value}}"
+                  data-dtype="Number"
+                  data-rl-type="value"
+                />
+                / 
+                <input
+                  class="resource-list-val w-4 text-center  bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+                  type="number"
+                  name="resourceList-max-{{id}}"
+                  value="{{item.max}}"
+                  data-dtype="Number"
+                  data-rl-type="max"
+                />
+
+              <div class="item-controls text-right">
+                <a class="item-control resource-delete text-gray-400 hover:text-red-600 transition-colors" title='{{localize '
+                  swnr.sheet.delete-item'}}'><i class="fas fa-trash"></i></a>
+              </div>
+          </li>
+          {{/each}}
+        </ol>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div> <!-- end other /foci tab-->

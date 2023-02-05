@@ -1,0 +1,23 @@
+<div class="flex gap-1 items-baseline item armor" data-item-id="{{item.id}}">
+  <label class="sheet-button items-center">
+    <input
+      type="checkbox"
+      name="items.{{item.id}}.data.use"
+      {{checked item.data.data.use}}
+    />
+    <span class="ml-1 item-name">{{item.name}}</span>
+    {{!-- {{localize 'swnr.armor.equipped'}} --}}
+  </label>
+  <a
+    class="item-control item-edit text-gray-400 hover:text-purple-800 transition-colors"
+    title="{{localize 'swnr.sheet.edit-item'}}"
+  >
+    <i class="fas fa-edit"></i>
+  </a>
+  <a
+    class="item-control item-delete text-gray-400 hover:text-red-600 transition-colors"
+    title="{{localize 'swnr.sheet.delete-item'}}"
+  >
+    <i class="fas fa-trash"></i>
+  </a>
+</div>

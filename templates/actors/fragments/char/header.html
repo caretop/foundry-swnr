@@ -1,0 +1,240 @@
+<div class="">
+  <div class="flex gap-2">
+    <img
+      class="profile-img w-24 h-24 object-contain"
+      src="{{actor.img}}"
+      title="{{actor.name}}"
+      data-edit="img"
+    />
+    <div class="flex-grow grid grid-cols-4 items-center gap-1">
+      <input
+        name="name"
+        class="text-2xl  bg-transparent col-span-2 px-1.5 py-3.5 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="text"
+        value="{{actor.name}}"
+        placeholder="{{localize 'swnr.sheet.name'}}"
+      />      
+      <!-- Level -->
+      <div class="pr-0.5 text-lg flex flex-rw gap-2">
+        <label>{{localize 'swnr.sheet.level'}}</label>
+
+        <div
+          class="gap-1 pl-1 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md flex items-center"
+        >
+          <input
+            type="number"
+            class="bg-transparent text-center flex-shrink w-12"
+            min="1"
+            step="1"
+            name="data.level.value"
+            value="{{actor.data.data.level.value}}"
+            data-dtype="Number"
+          />
+        </div>
+      </div>
+
+      <!-- XP -->
+      <div class="exp pr-0.5 text-lg flex flex-row gap-2">
+        <label>{{localize 'swnr.sheet.xp'}}</label>
+
+        <div 
+          class="gap-1 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md flex items-center"
+        >
+          <input
+            class="w-8 text-right pl-1.5 py-3.5 bg-transparent "
+            type="number"
+            step="1"
+            name="data.level.exp"
+            min="0"
+            data-dtype="Number"
+            value="{{actor.data.data.level.exp}}"
+          /><span>/</span
+          ><input
+            class="w-8 text-left pr-1.5 py-3.5 bg-transparent "
+            type="number"
+            step="1"
+            name="data.level.expToLevel"
+            min="0"
+            data-dtype="Number"
+            value="{{actor.data.data.level.expToLevel}}"
+          />
+        </div>
+      </div>
+
+      <!-- HP -->
+      <div class="hp flex flex-row justify-center items-center text-lg">
+        <label class="hp-label hover:text-shadow hover:text-shadow-blueGray-600 cursor-pointer transition-text-shadow"
+            >{{localize 'swnr.sheet.hp'}}
+            <i class="fas fa-dice-d20"></i>
+        </label>
+        <div class="border border-gray-800 bg-gray-400 mx-auto rounded-md">
+          <input
+            class="w-8 text-right pl-1.5 py-3.5 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+            type="number"
+            step="1"
+            name="data.health.value"
+            value="{{actor.data.data.health.value}}"
+            data-dtype="Number"
+            min="0"
+          /><span>/</span
+          ><input
+            class="w-8 text-left pr-1.5 py-3.5 bg-opacity-75 bg-gray-400 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+            type="number"
+            name="data.health.max"
+            value="{{actor.data.data.health.max}}"
+            step="1"
+            min="1"
+            data-dtype="Number"
+          />
+        </div>
+        <span>
+          <a class="rest-button pl-1.5" title='{{localize 'swnr.sheet.rest'}}'>
+            <i class="fas fa-bed"></i>
+          </a>
+        </span>
+      </div>
+      <!-- strain -->
+      <div class="system flex flex-row items-center justify-center text-lg pl-5">
+        <label>{{localize 'swnr.sheet.ss'}}</label>
+        <div class="border border-gray-800 bg-gray-400 mx-auto rounded-md">
+          <input
+            class="w-8 text-right pl-1.5 py-3.5 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+            type="number"
+            name="data.systemStrain.value"
+            value="{{actor.data.data.systemStrain.value}}"
+            data-dtype="Number"
+          />/<span
+            class="inline-block text-left text-gray-300 cursor-not-allowed w-8"
+            >{{actor.data.data.systemStrain.max}}</span
+          >
+        </div>
+      </div>
+
+      <!--AC&soak-->
+      <div class="ac flex flex-col justify-around items-center text-lg">
+        <div class="text-center"> <label class="pr-3"><b>Ranged AC</label> {{actor.data.data.rangedAC}}</b></div>
+        <div class="text-center"> <label class="pr-3"><b>Melee AC</label> {{actor.data.data.meleeAC}}</b></div>
+        <div class="exp pr-0.5 text-lg flex flex-row gap-2">
+          <a class="soak-reset-button border border-gray-800 bg-gray-400 mx-auto rounded-md">soak</a>
+
+          <div 
+            class="gap-1 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md flex items-center"
+          >
+            <input
+              class="w-8 text-right pl-1.5 py-3.5 bg-transparent "
+              type="number"
+              step="1"
+              name="data.soak.value"
+              min="0"
+              data-dtype="Number"
+              value="{{actor.data.data.soak.value}}"
+            /><span>/</span
+            ><input
+              class="w-8 text-left pr-1.5 py-3.5 bg-transparent "
+              type="number"
+              step="1"
+              name="data.soak.max"
+              min="0"
+              data-dtype="Number"
+              value="{{actor.data.data.soak.max}}"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- AB-->
+      <div class="ab flex flex-row justify-around items-center text-lg">
+        <label>{{localize 'swnr.sheet.attack-bonus'}}</label>
+        <input
+          class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+          type="number"
+          step="1"
+          name="data.ab"
+          min="-9"
+          max="99"
+          data-dtype="Number"
+          value="{{actor.data.data.ab}}"
+        />
+      </div>  
+      <div class="flex gap-2 items-center">
+        <div
+          class="bg-green-300 border border-green-900 w-full rounded-full h-4 overflow-hidden"
+        >
+          <div
+            class="bg-green-500 h-full rounded-full"
+            style="width: min(calc(100% * {{actor.data.data.health.value}}/{{actor.data.data.health.max}}));"
+          ></div>
+        </div>
+      </div>
+      <div class="flex gap-2 items-center">
+        <div
+          class="bg-blue-300 border border-blue-900 w-full rounded-full h-4 overflow-hidden"
+        >
+          <div
+            class="bg-blue-500 h-full rounded-full"
+            style="width: min(calc(100% * {{actor.data.data.systemStrain.value}}/{{actor.data.data.systemStrain.max}}));"
+          ></div>
+        </div>
+      </div>
+      <div class="flex gap-2 items-center">
+      </div>
+      <!-- speed/movement -->
+      <div class="flex gap-2 items-center text-lg">
+        <label>{{localize 'swnr.sheet.movement'}}</label>
+          <div class="flex w-12">
+          <input
+            class="border border-r-0 border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-l-md text-right"
+            type="number"
+            name="data.speed"
+            min="0"
+            step="1"
+            value="{{actor.data.data.speed}}"
+          />
+          <div
+            class="border border-l-0 border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-r-md text-base pl-0.5 pr-1"
+          >
+            m
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Saves -->
+      <div
+        class="saves col-span-4 flex-shrink-0 flex flex-row justify-between py-1 flex-wrap gap-2"
+      >
+        <div
+          data-save-type="physical"
+          class="save sheet-button gap-2"
+        >
+          v{{actor.data.data.save.physical}} {{localize
+          'swnr.sheet.saves.physical'}}
+          <i class="fas fa-dice-d20"></i>
+        </div>
+        <div
+          data-save-type="evasion"
+          class="save sheet-button gap-2"
+        >
+          v{{actor.data.data.save.evasion}} {{localize 'swnr.sheet.saves.evasion'}}
+          <i class="fas fa-dice-d20"></i>
+        </div>
+        <div
+          data-save-type="mental"
+          class="save sheet-button gap-2"
+        >
+          v{{actor.data.data.save.mental}} {{localize 'swnr.sheet.saves.mental'}}
+          <i class="fas fa-dice-d20"></i>
+        </div>
+        {{#if useHomebrewLuckSave}}
+        <div
+          data-save-type="luck"
+          class="save sheet-button gap-2"
+        >
+          v{{actor.data.data.save.luck}} {{localize 'swnr.sheet.saves.luck'}}
+          <i class="fas fa-dice-d20"></i>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

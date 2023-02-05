@@ -1,0 +1,72 @@
+<form class="{{cssClass}} -m-2 p-2 form-sheet">
+  {{> "systems/swnr/templates/items/fragments/desc.html"}}
+  <div class="flex gap-2 justify-between">
+    <div>
+      <div>Stat:</div>
+      <select
+        name="data.defaultStat"
+        class="px-1 border border-gray-800 bg-gray-400 bg-opacity-75 rounded-md"
+      >
+        {{#select data.data.defaultStat}}
+        <option value="ask">{{localize 'swnr.sheet.ask'}}</option>
+        {{#*inline "statline"}}
+        <option value="{{name}}">
+          {{localize (concat 'swnr.stat.short.' name)}}
+        </option>
+        {{/inline}} {{> statline name="str"}} {{> statline name="dex"}} {{>
+        statline name="con"}} {{> statline name="int"}} {{> statline
+        name="wis"}} {{> statline name="cha"}} {{/select}}
+      </select>
+    </div>
+    <div>
+      <div>Die Pool:</div>
+      <select
+        name="data.pool"
+        class="px-1 border border-gray-800 bg-gray-400 bg-opacity-75 rounded-md"
+      >
+        {{#select data.data.pool}}
+        <option value="ask">{{localize 'swnr.sheet.ask'}}</option>
+        <option value="2d6">2D6</option>
+        <option value="3d6kh2">3D6</option>
+        <option value="4d6kh2">4D6</option>
+        {{/select}}
+      </select>
+    </div>
+    <div>
+      <div>Skill Level:</div>
+      <input
+        type="number"
+        class="px-1 text-center w-8 border border-gray-800 bg-gray-400 bg-opacity-75 rounded-md"
+        name="data.rank"
+        min="-1"
+        max="4"
+        step="1"
+        value="{{data.data.rank}}"
+      />
+    </div>
+    <div>
+      <div>Source:</div>
+      <input
+        type="text"
+        name="data.source"
+        value="{{data.data.source}}"
+        class="px-1 border border-gray-800 bg-gray-400 bg-opacity-75 rounded-md"
+      />
+    </div>
+  </div>
+  <div class="p-2 m-2">
+    {{#if data.data.remember}}
+      {{#if data.data.remember.use}}
+        <label class="flex items-center gap-1">
+          <input
+            type="checkbox"
+            name="data.remember.use"
+            {{checked data.data.remember.use}}
+          />
+          <div>Use remembered skill (dice, mod, etc). <br>
+            Uncheck to forget and ask on next to roll -- stat and dice selection will remain.</div>
+        </label>
+      {{/if}}
+    {{/if}}
+  </div>
+</form>

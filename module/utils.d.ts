@@ -1,0 +1,22 @@
+import { SWNRCharacterBaseData, SWNRCharacterComputedData } from "./actor-types";
+import { SWNRCharacterActor } from "./actors/character";
+import { SWNRNPCActor } from "./actors/npc";
+export declare function chatListeners(message: ChatMessage, html: JQuery): void;
+export declare function _addRerollButton(html: JQuery): void;
+export declare function _addHealthButtons(html: JQuery): void;
+export declare function applyHealthDrop(total: number): Promise<void>;
+export declare function _findCharTargets(): (SWNRCharacterActor | SWNRNPCActor)[];
+export declare function _onChatCardAction(event: JQuery.ClickEvent): Promise<void>;
+export declare function getDefaultImage(itemType: string): string | null;
+export declare function calculateStats(stats: Merge<SWNRCharacterBaseData, SWNRCharacterComputedData>["stats"]): void;
+export declare function limitConcurrency<Callback extends (...unknown: any[]) => unknown>(fn: Callback): Callback;
+export declare function initCompendSkills(actor: SWNRCharacterActor): Promise<void>;
+export declare function initSkills(actor: SWNRCharacterActor, skillSet: keyof typeof skills): void;
+declare const skills: {
+    none: string[];
+    spaceMagic: string[];
+    classic: string[];
+    revised: string[];
+    psionic: string[];
+};
+export {};

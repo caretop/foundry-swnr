@@ -1,0 +1,232 @@
+<div class="stats -text-xs">
+  <table>
+    <thead>
+      <tr>
+        <th>
+        </th>
+        {{#if showTempAttrMod}}
+        <th class="px-1 hidden lg:table-cell">
+          {{localize 'swnr.sheet.temp'}}
+        </th>
+        {{/if}}
+        <th  class="px-1 hidden lg:table-cell">
+          {{localize 'swnr.sheet.total'}}
+        </th>
+        <th class="px-1">{{localize 'swnr.sheet.mod'}}</th>
+
+      </tr>
+    </thead>
+    {{#each actor.data.data.stats as |stat key|}}
+    <tr>
+      <td class="attrClick" data-attr="{{key}}">
+        <label for="data.stats.{{key}}.base" class="resource-label px-1">
+          {{localize (concat 'swnr.stat.short.' key)}}
+        </label>
+      </td>
+      
+      {{#if ../showTempAttrMod}}
+      <td class="text-center hidden lg:table-cell">
+        <input
+          type="number"
+          class="w-8 px-1 py-1 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+          step="1"
+          name="data.stats.{{key}}.temp"
+          value="{{stat.temp}}"
+          data-dtype="Number"
+        />
+      </td>
+      {{/if}}
+      <td class="text-center hidden lg:table-cell">
+        <div
+          class="w-8  px-1 py-0.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md text-gray-300"
+        >
+        {{stat.total}}
+        </div>
+      </td>
+      <td class="text-center">
+        <span class="stat-mod">
+          {{numberFormat stat.mod decimals=0 sign=true}}
+        </span>
+      </td>
+    </tr>
+    {{/each}}
+  </table>
+</div>
+<div class="core-stats  gap-1 text-center">
+
+</div>
+<div class="flex-col flex gap-1">
+  <div class="flex flexrow">
+    <div class="flex gap-1 items-center">
+      <div><h3>{{localize 'swnr.effort.title'}} {{actor.data.data.effort.value}}/{{actor.data.data.effort.max}}</h3></div>
+      <div
+        class="bg-purple-300 border border-purple-900 w-full rounded-full h-4 overflow-hidden"
+      >
+        <div
+          class="bg-purple-500 h-full rounded-full"
+          style="width: min(calc(100% * {{actor.data.data.effort.value}}/{{actor.data.data.effort.max}}));"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2"> <!--lg:flex-row-->
+    <div class="flex flex-col">
+      <label for="data.effort.bonus">
+        {{localize 'swnr.effort.bonus'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        step="1"
+        name="data.effort.bonus"
+        value="{{actor.data.data.effort.bonus}}"
+        data-dtype="Number"
+      />
+    </div>
+    <div class="flex flex-col">
+
+      <label for="data.effort.current">
+        {{localize 'swnr.effort.current'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        min="0"
+        step="1"
+        max="{{concat data.effort.current data.effort.value}}"
+        name="data.effort.current"
+        value="{{actor.data.data.effort.current}}"
+        data-dtype="Number"
+      />
+    </div>
+    <div class="flex flex-col">
+      <label for="data.effort.scene">
+        {{localize 'swnr.effort.scene'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        min="0"
+        step="1"
+        max="{{concat data.effort.scene data.effort.value}}"
+        name="data.effort.scene"
+        value="{{actor.data.data.effort.scene}}"
+        data-dtype="Number"
+      />
+    </div>
+    <div class="flex flex-col">
+      <label for="data.effort.day"
+        >{{localize 'swnr.effort.day'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        min="0"
+        step="1"
+        max="{{concat data.effort.day data.effort.value}}"
+        name="data.effort.day"
+        value="{{actor.data.data.effort.day}}"
+        data-dtype="Number"
+      />
+    </div>
+  </div>
+
+</div>
+{{#if actor.data.data.tweak.extraEffortName}}
+<div class="flex-col flex gap-1">
+  <div class="flex flexrow">
+    <div class="flex gap-1 items-center">
+      <div>
+        <h3>{{ actor.data.data.tweak.extraEffortName }} {{localize 'swnr.effort.title'}}
+        {{actor.data.data.tweak.extraEffort.value}}/{{actor.data.data.tweak.extraEffort.max}}
+      </div>
+      <div
+        class="bg-purple-300 border border-purple-900 w-full rounded-full h-4 overflow-hidden"
+      >
+        <div
+          class="bg-purple-500 h-full rounded-full"
+          style="width: min(calc(100% * {{actor.data.data.tweak.extraEffort.value}}/{{actor.data.data.tweak.extraEffort.max}}));"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-row  gap-1"> <!--lg:flex-row-->
+    <div>
+      <label for="data.tweak.extraEffort.max">
+        {{localize 'swnr.effort.max'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        step="1"
+        name="data.tweak.extraEffort.max"
+        value="{{actor.data.data.tweak.extraEffort.max}}"
+        data-dtype="Number"
+      />
+    </div>
+    <div>
+      <label for="data.tweak.extraEffort.bonus">
+        {{localize 'swnr.effort.bonus'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        step="1"
+        name="data.tweak.extraEffort.bonus"
+        value="{{actor.data.data.tweak.extraEffort.bonus}}"
+        data-dtype="Number"
+      />
+    </div>
+    <div>
+      <label for="data.tweak.extraEffort.current">
+        {{localize 'swnr.effort.current'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        min="0"
+        step="1"
+        max="{{concat data.tweak.extraEffort.current data.tweak.extraEffort.value}}"
+        name="data.tweak.extraEffort.current"
+        value="{{actor.data.data.tweak.extraEffort.current}}"
+        data-dtype="Number"
+      />
+    </div>
+  </div>
+  <div class="flex flex-row  gap-1"> <!--lg:flex-row-->
+
+    <div>
+      <label for="data.tweak.extraEffort.scene">
+        {{localize 'swnr.effort.scene'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        min="0"
+        step="1"
+        max="{{concat data.tweak.extraEffort.scene data.tweak.extraEffort.value}}"
+        name="data.tweak.extraEffort.scene"
+        value="{{actor.data.data.tweak.extraEffort.scene}}"
+        data-dtype="Number"
+      />
+    </div>
+    <div>
+      <label for="data.tweak.extraEffort.day"
+        >{{localize 'swnr.effort.day'}}:
+      </label>
+      <input
+        class="w-10 text-center px-1.5 py-3.5 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+        type="number"
+        min="0"
+        step="1"
+        max="{{concat data.tweak.extraEffort.day data.tweak.extraEffort.value}}"
+        name="data.tweak.extraEffort.day"
+        value="{{actor.data.data.tweak.extraEffort.day}}"
+        data-dtype="Number"
+      />
+    </div>
+  </div>
+</div>
+{{/if}}

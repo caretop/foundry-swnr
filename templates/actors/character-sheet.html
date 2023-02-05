@@ -1,0 +1,70 @@
+<form class="{{cssClass}} -m-2 p-2 form-sheet">
+  {{#if actor.limited}}
+    {{>
+    "systems/swnr/templates/actors/fragments/limited-sheet.html"
+    actor=actor
+    }}
+  {{else}}
+  {{>
+  "systems/swnr/templates/actors/fragments/char/header.html"
+  actor=actor
+  }}
+  <div class="flex gap-2">
+    <div class="flex flex-col flex-shrink flex-wrap">
+        {{>
+        "systems/swnr/templates/actors/fragments/char/sidebar.html"
+        actor=actor
+        }}
+    </div>
+
+    <div class="w-full">
+      <nav
+        {{!-- class="pc-sheet-tabs tabs py-1 flex flex-wrap gap-2 border-t border-b border-bgGray-900 border1 mb-1" --}}
+        class="pc-sheet-tabs tabs py-1 flex flex-wrap gap-2 border-t border-b border-l border-r border-blueGray-900 border0 mb-1 bg-blueGray-800 text-gray-100"
+        data-group="primary"
+      >
+
+        <a class="item" data-tab="combat">
+          {{localize 'swnr.sheet.tabs.combat'}}
+        </a>
+        <a class="item" data-tab="inventory">
+          {{localize 'swnr.sheet.tabs.inventory'}}
+        </a>
+        <a class="item" data-tab="skills">
+          {{localize 'swnr.sheet.tabs.skills'}}
+        </a>
+        <a class="item" data-tab="powers">
+          {{localize 'swnr.sheet.tabs.powers'}}
+        </a>
+        <a class="item" data-tab="stats">
+          {{localize 'swnr.sheet.tabs.stats'}}
+        </a>
+        <a class="item" data-tab="biography">
+          {{localize 'swnr.sheet.tabs.biography'}}
+        </a>
+      </nav>
+      <section class="sheet-body">
+        {{>
+         "systems/swnr/templates/actors/fragments/char/tab-bio.html" actor=actor
+        }}
+        {{>
+         "systems/swnr/templates/actors/fragments/char/tab-combat.html" actor=actor
+        }}
+        {{>
+         "systems/swnr/templates/actors/fragments/char/tab-inv.html" actor=actor
+        }}
+        {{>
+         "systems/swnr/templates/actors/fragments/char/tab-power.html" actor=actor
+        }}
+        {{>
+         "systems/swnr/templates/actors/fragments/char/tab-skills.html" actor=actor
+        }}
+
+        {{>
+         "systems/swnr/templates/actors/fragments/char/tab-stats.html" actor=actor
+        }}
+      </section>
+    </div>
+  </div>
+  {{/if}}
+</form>
