@@ -2,7 +2,7 @@
   "name": "swnr",
   "title": "Stars Without Number: Revised (wsAI Alter.)-for CWN",
   "description": "Stars Without Number: Revised system (alternate version)-with basic CWN mechanics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Spice_King + wintersleepAI- edited by caretop",
   "scripts": [
     "lib/sortable/Sortable.min.js"
