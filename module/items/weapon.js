@@ -63,7 +63,7 @@ export class SWNRWeapon extends SWNRBaseItem {
 
         //const multDamageRoll = new Roll(this.data.data.damage*2 + " + @burstFire*2 + @stat*2 + @damageBonus*2", rollData);
         if(traumaRoll.total>=6){
-            damageRoll = new Roll("("+this.data.data.damage + "+@burstFire + @stat + @damageBonus)*2", rollData);
+            damageRoll = new Roll("("+this.data.data.damage + "+@burstFire + @stat + @damageBonus)" + "*" + this.data.data.traumaRating,rollData);
         }
        
         await damageRoll.roll({ async: true });
