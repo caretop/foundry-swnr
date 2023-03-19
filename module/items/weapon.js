@@ -7,7 +7,7 @@ export class SWNRWeapon extends SWNRBaseItem {
     get canBurstFire() {
         return (this.ammo.burst &&
             (this.ammo.type === "infinite" ||
-                (this.ammo.type !== "none" && this.ammo.value >= 3)));
+                (this.ammo.type !== "none" && this.ammo.value >= 5)));
     }
     get hasAmmo() {
         return (this.ammo.type === "none" ||
@@ -28,7 +28,7 @@ export class SWNRWeapon extends SWNRBaseItem {
         if (useBurst &&
             this.ammo.type !== "infinite" &&
             this.ammo.type !== "none" &&
-            this.ammo.value < 3) {
+            this.ammo.value < 5) {
             (_c = ui.notifications) === null || _c === void 0 ? void 0 : _c.error(`Your ${this.name} is does not have enough ammo to burst!`);
             return;
         }
@@ -119,8 +119,8 @@ export class SWNRWeapon extends SWNRBaseItem {
         }
         const chatContent = await renderTemplate(template, dialogData);
         // TODO: break up into two rolls and chain them?
-        // const promise = game.dice3d
-        //   ? game.dice3d.showForRoll(diceData)
+        // const promise = game.dice5d
+        //   ? game.dice5d.showForRoll(diceData)
         //   : Promise.resolve();
         // promise.then(() => {
         const chatData = {
@@ -150,7 +150,8 @@ export class SWNRWeapon extends SWNRBaseItem {
             weaponName: this.name,
         });
         const ammo = this.data.data.ammo;
-        const burstFireHasAmmo = ammo.type !== "none" && ammo.burst && ammo.value >= 3;
+        const burstFireHasAmmo = ammo.type !== "none" && ammo.burst && ammo.value >= 5;
+        console.log("why?")
         let dmgBonus = 0;
         // for finesse weapons take the stat with the higher mod
         let statName = this.data.data.stat;
