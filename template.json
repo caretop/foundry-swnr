@@ -47,6 +47,8 @@
         },
         "speed": 10,
         "ab": 0,
+        "traumaRb":0,
+        "traumaRp":0,
         "systemStrain": {
           "value": 0,
           "permanent": 0
@@ -412,7 +414,8 @@
       "quantity": 1,
       "save": null,
       "traumaDie":"d6",
-      "traumaRating": 2
+      "traumaRating": 2,
+      "picToggle": false
     },
     "power": {
       "templates": [
