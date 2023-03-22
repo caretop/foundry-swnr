@@ -2,10 +2,11 @@
   <h3 title="{{ weapon.data.data.description }}">{{ weapon.name }}</h3>
 
   <span title="{{ diceTooltip.hitExplain }}" class="roll roll-hit">{{{ diceTooltip.hit }}}</span>
-  <span>Trauma Roll:</span>
+  <span class ="span trauma-title">Trauma Roll / Trauma Rating: x{{weapon.data.data.traumaRating}}</span>
   <span class="roll roll-trauma">{{{ diceTooltip.trauma }}}</span>
-  <span>{{localize 'swnr.weapon.damage'}}:</span>
-  <span title="{{ diceTooltip.damageExplain }}" class="roll roll-damage">{{{ diceTooltip.damage }}}</span>
+
+  <span class="dmg-title">{{localize 'swnr.weapon.damage'}}:</span>
+  <span title="{{ diceTooltip.damageExplain }}" class="roll orgDamage roll-damage">{{{ diceTooltip.damage }}}</span>
   {{#if (ne shock_content null)}}
    {{ shock_content }}
    <span class="roll roll-shock roll-damage">{{{ shock_roll }}}</span>

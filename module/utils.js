@@ -1,12 +1,16 @@
 import { ValidatedDialog } from "./ValidatedDialog.js";
 export function chatListeners(message, html) {
     html.on("click", ".card-buttons button", _onChatCardAction.bind(this));
-    html.find(".roll-damage").each((_i, div) => {
+    /*
+    html.find(".roll-shock").each((_i, div) => {
+        //_addHealthButtons($(div));
+    });*/
+
+    html.find(".orgDamage").each((_i, div) => {
+        //_addTraumaHitButton($(div));
         _addHealthButtons($(div));
     });
-    // html.find(".dice-roll").each((_i, div) => {
-    //   _addRerollButton($(div));
-    // });
+
     //html.on("click", ".item-name", this._onChatCardToggleContent.bind(this));
     const longDesc = html.find(".longShowDesc");
     if (longDesc) {
@@ -33,18 +37,116 @@ export function chatListeners(message, html) {
         shortDesc.on("click", bind);
     }
 }
-export function _addRerollButton(html) {
+
+Hooks.on("getChatLogEntryContext", (html, options) => {
+    let canApply = li => li.find(".dice-roll").length && game.user.role == 4;
+    options.push(
+      {
+        name: "Modify this roll",
+        icon: '<i class="fas fa-pencil-alt"></i>',
+        condition: canApply,
+        callback: li => modifyRoll(li)
+    })
+})
+
+async function modifyRoll(li) {
+    let this_mess = ui.chat.collection.get($(li).attr("data-message-id"));
+    let newRoll = duplicate(this_mess.roll);
+
+    let modification = await new Promise(resolve => {
+        new Dialog({
+            title: "Modify Roll",
+            content: 
+                `<div>
+                    <label> Modifier: </label>
+                    <input type = "number" class = "postModifier" value = "0">
+                    </input>
+                </div>`,
+            buttons: {
+                ok: {
+                    label: "OK",
+                    callback: () => {
+                        resolve({
+                            Modifier:$('.postModifier')[0].value,
+                        })
+                    }               
+                },
+                no: {
+                    label: "Cancel",
+                },
+            },
+            default: "ok",
+        }).render(true);
+    })
+
+    let input_mod = parseInt(modification.Modifier);
+    newRoll.total = newRoll.total + input_mod;
+    if (this_mess.data.flavor === undefined) {
+        if (input_mod < 0) {
+            newRoll.formula = (newRoll.formula + input_mod);
+            newRoll.flavor = ("<i>Modifier: " + input_mod + "<i/>");
+        }
+        if (input_mod >= 0 ) {
+            newRoll.formula = (newRoll.formula + " + " + input_mod);
+            newRoll.flavor = ("<i>Modifier: +" + input_mod + "<i/>");
+        }
+    }
+    if (this_mess.data.flavor != undefined) { 
+        if (input_mod < 0) {
+            newRoll.formula = (newRoll.formula + input_mod);
+            newRoll.flavor = (this_mess.data.flavor + "<br/><i>Modifier: " + input_mod + "<i/>");
+        }
+        if (input_mod >= 0 ) {
+            newRoll.formula = (newRoll.formula + " + " + input_mod);
+            newRoll.flavor = (this_mess.data.flavor + "<br/><i>Modifier: +" + input_mod + "<i/>");
+        }
+    }
+
+    await this_mess.update({flavor: newRoll.flavor, content: newRoll.total, roll: JSON.stringify(newRoll)});
+    li = [];
+    this_mess = [];
+    newRoll = [];
+    this_mess = [];
+    modification = [];
+    input_mod = [];
+    return li;
+}
+
+
+
+export function _addTraumaHitButton(html) {
     const totalDiv = html.find(".dice-total");
+    const formulaDiv = html.find(".dice-formula")
+    const traumaDiv = html.siblings(".trauma-title")
     const total = parseInt(totalDiv.text());
+    const traumaRate = parseInt(traumaDiv.text().slice(-1))
+    const multTotal = total * traumaRate;
+   
+    /*
     if (isNaN(total)) {
         console.log("Error in converting a string to a number " + totalDiv.text());
         return;
-    }
-    const rerollButton = $(`<button class="dice-total-fullDamage-btn chat-button-small"><i class="fas fa-rotate-right" title="Reroll"></i></button>`);
-    const btnContainer = $('<span class="dmgBtn-container" style="position:absolute; right:0; bottom:1px;"></span>');
-    btnContainer.append(rerollButton);
-    totalDiv.append(btnContainer);
+    }*/
+    const TraumaHitButton = $(`<button class="dice-total-fullDamage-btn chat-button-small"><i class="fas fa-head-side-virus" title="Traumatic Hit"></i></button>`);
+    const btnContainer = $('<span class="dmgBtn-container" style="bottom:1px;"></span>');
+    btnContainer.append(TraumaHitButton);
+    html.siblings(".dmg-title").append(btnContainer);
+
+    TraumaHitButton.on("click", (ev) => {
+        ev.stopPropagation();
+        new roll
+        //totalDiv.text(multTotal.toString())
+        //console.log(totalDiv.text("1"))
+        //applyHealthDrop(totalDiv.text())
+    });
 }
+
+
+
+
+
+
+
 export function _addHealthButtons(html) {
     const totalDiv = html.find(".dice-total");
     const total = parseInt(totalDiv.text());
@@ -52,20 +154,22 @@ export function _addHealthButtons(html) {
         console.log("Error in converting a string to a number " + totalDiv.text());
         return;
     }
+
     const fullDamageButton = $(`<button class="dice-total-fullDamage-btn chat-button-small"><i class="fas fa-user-minus" title="Click to apply full damage to selected token(s)."></i></button>`);
     const halfDamageButton = $(`<button class="dice-total-halfDamage-btn chat-button-small"><i class="fas fa-user-shield" title="Click to apply half damage to selected token(s)."></i></button>`);
     // const doubleDamageButton = $(`<button class="dice-total-doubleDamage-btn" style="${btnStyling}"><i class="fas fa-user-injured" title="Click to apply double damage to selected token(s)."></i></button>`);
     const fullHealingButton = $(`<button class="dice-total-fullHealing-btn chat-button-small"><i class="fas fa-user-plus" title="Click to apply full healing to selected token(s)."></i></button>`);
-    const btnContainer = $('<span class="dmgBtn-container" style="position:absolute; right:0; bottom:1px;"></span>');
+    const btnContainer = $('<span class="dmgBtn-container" style=" right:24px; bottom:1px;"></span>');
     btnContainer.append(fullDamageButton);
     btnContainer.append(halfDamageButton);
     // btnContainer.append(doubleDamageButton);
     btnContainer.append(fullHealingButton);
     totalDiv.append(btnContainer);
+    html.siblings(".dmg-title").append(btnContainer)
     // Handle button clicks
     fullDamageButton.on("click", (ev) => {
         ev.stopPropagation();
-        applyHealthDrop(total);
+        applyHealthDrop(parseInt(totalDiv.text()));
     });
     halfDamageButton.on("click", (ev) => {
         ev.stopPropagation();

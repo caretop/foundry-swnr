@@ -7,7 +7,7 @@ export class SWNRWeapon extends SWNRBaseItem {
     get canBurstFire() {
         return (this.ammo.burst &&
             (this.ammo.type === "infinite" ||
-                (this.ammo.type !== "none" && this.ammo.value >= 3)));
+                (this.ammo.type !== "none" && this.ammo.value >= 5)));
     }
     get hasAmmo() {
         return (this.ammo.type === "none" ||
@@ -28,7 +28,7 @@ export class SWNRWeapon extends SWNRBaseItem {
         if (useBurst &&
             this.ammo.type !== "infinite" &&
             this.ammo.type !== "none" &&
-            this.ammo.value < 3) {
+            this.ammo.value < 5) {
             (_c = ui.notifications) === null || _c === void 0 ? void 0 : _c.error(`Your ${this.name} is does not have enough ammo to burst!`);
             return;
         }
@@ -58,7 +58,7 @@ export class SWNRWeapon extends SWNRBaseItem {
 
         let damageRoll = new Roll("("+this.data.data.damage + "+@burstFire + @stat + @damageBonus)", rollData);    
 
-        const traumaRoll = new Roll(this.data.data.traumaDie, rollData);
+        const traumaRoll = new Roll(this.data.data.traumaDie + "+@actor.traumaRb", rollData);
         await traumaRoll.roll({ async: true });
 
         //const multDamageRoll = new Roll(this.data.data.damage*2 + " + @burstFire*2 + @stat*2 + @damageBonus*2", rollData);
@@ -112,15 +112,15 @@ export class SWNRWeapon extends SWNRBaseItem {
         const diceData = Roll.fromTerms([PoolTerm.fromRolls(rollArray)]);
         if (this.data.data.ammo.type !== "none" &&
             this.data.data.ammo.type !== "infinite") {
-            const newAmmoTotal = this.data.data.ammo.value - 1 - burstFire;
+            const newAmmoTotal = this.data.data.ammo.value - 1 - (burstFire + 2);
             await this.update({ "data.ammo.value": newAmmoTotal }, {});
             if (newAmmoTotal === 0)
                 (_g = ui.notifications) === null || _g === void 0 ? void 0 : _g.warn(`Your ${this.name} is now out of ammo!`);
         }
         const chatContent = await renderTemplate(template, dialogData);
         // TODO: break up into two rolls and chain them?
-        // const promise = game.dice3d
-        //   ? game.dice3d.showForRoll(diceData)
+        // const promise = game.dice5d
+        //   ? game.dice5d.showForRoll(diceData)
         //   : Promise.resolve();
         // promise.then(() => {
         const chatData = {
@@ -150,7 +150,7 @@ export class SWNRWeapon extends SWNRBaseItem {
             weaponName: this.name,
         });
         const ammo = this.data.data.ammo;
-        const burstFireHasAmmo = ammo.type !== "none" && ammo.burst && ammo.value >= 3;
+        const burstFireHasAmmo = ammo.type !== "none" && ammo.burst && ammo.value >= 5;
         let dmgBonus = 0;
         // for finesse weapons take the stat with the higher mod
         let statName = this.data.data.stat;

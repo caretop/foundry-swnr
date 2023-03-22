@@ -7,6 +7,7 @@ export class BaseActorSheet extends ActorSheet {
         html.find(".item-delete").on("click", this._onItemDelete.bind(this));
         html.find(".item-reload").on("click", this._onItemReload.bind(this));
         html.find(".item-show").on("click", this._onItemShow.bind(this));
+        html.find(".item-pictoggle").on("click", this._onItemPicToggle.bind(this));
         html
             .find(".item-toggle-broken")
             .on("click", this._onItemBreakToggle.bind(this));
@@ -165,6 +166,21 @@ export class BaseActorSheet extends ActorSheet {
             console.log("Unable to find ammo in item ", item.data.data);
         }
     }
+
+    async _onItemPicToggle(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const wrapper = $(event.currentTarget).parents(".item");
+        const item = this.actor.getEmbeddedDocument("Item", wrapper.data("itemId"));
+        const new_picToggle_status = !(item === null || item === void 0 ? void 0 : item.data.data.picToggle);
+        
+        if (item instanceof Item)
+            await (item === null || item === void 0 ? void 0 : item.update({
+                "data.picToggle": new_picToggle_status
+            }));
+      // $(event.currentTarget).parents(".item").toggleClass("show")
+    }
+
     async _onItemBreakToggle(event) {
         event.preventDefault();
         event.stopPropagation();
