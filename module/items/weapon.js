@@ -228,7 +228,7 @@ export class SWNRWeapon extends SWNRBaseItem {
             // const skill = this.actor.items.filter(w => w.)
             // Burst is +2 To hit and to damage
             if (((_h = this.actor) === null || _h === void 0 ? void 0 : _h.type) == "character") {
-                dmgBonus = this.data.data.skillBoostsDamage ? skill.data.data.rank : 0;
+                dmgBonus = this.data.data.bonusDamage + this.data.data.skillBoostsDamage ? skill.data.data.rank : 0;
             }
             else if (((_j = this.actor) === null || _j === void 0 ? void 0 : _j.type) == "npc") {
                 dmgBonus = this.data.data.skillBoostsDamage

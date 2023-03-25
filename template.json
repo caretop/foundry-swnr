@@ -49,6 +49,7 @@
         "ab": 0,
         "traumaRb":0,
         "traumaRp":0,
+        "bonusDamage":0,
         "systemStrain": {
           "value": 0,
           "permanent": 0
