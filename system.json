@@ -279,7 +279,7 @@
   "compatibleCoreVersion": 10.291,
   "url": "https://github.com/caretop/foundry-swnr",
   "manifest": "https://raw.githubusercontent.com/caretop/foundry-swnr/master/system.json",
-  "download": "https://github.com/caretop/foundry-swnr/archive/refs/tags/1.0.3.zip",
+  "download": "https://github.com/caretop/foundry-swnr/archive/refs/tags/1.0.4.zip",
   "license": "https://github.com/caretop/foundry-swnr/blob/master/LICENSE.txt",
   "readme": "",
   "bugs": "https://github.com/caretop/foundry-swnr/issues",
