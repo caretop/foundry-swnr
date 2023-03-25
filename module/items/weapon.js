@@ -170,7 +170,8 @@ export class SWNRWeapon extends SWNRBaseItem {
             const skill = this.actor.getEmbeddedDocument("Item", this.data.data.skill);
             const skillMod = skill.data.data.rank < 0 ? -2 : skill.data.data.rank;
             if (((_g = this.actor) === null || _g === void 0 ? void 0 : _g.type) == "character") {
-                dmgBonus = this.data.data.skillBoostsDamage ? skill.data.data.rank + this.actor.data.data.bonusDamage : 0;
+                dmgBonus = this.data.data.skillBoostsDamage ? skill.data.data.rank : 0;
+                dmgBonus += this.actor.data.data.bonusDamage;
             }
             return this.rollAttack(dmgBonus, stat.mod, skillMod, this.data.data.remember.modifier, this.data.data.remember.burst);
         }
@@ -228,7 +229,8 @@ export class SWNRWeapon extends SWNRBaseItem {
             // const skill = this.actor.items.filter(w => w.)
             // Burst is +2 To hit and to damage
             if (((_h = this.actor) === null || _h === void 0 ? void 0 : _h.type) == "character") {
-                dmgBonus = this.data.data.skillBoostsDamage ? skill.data.data.rank + this.actor.data.data.bonusDamage : 0;
+                dmgBonus = this.data.data.skillBoostsDamage ? skill.data.data.rank : 0;
+                dmgBonus += this.actor.data.data.bonusDamage
             }
             else if (((_j = this.actor) === null || _j === void 0 ? void 0 : _j.type) == "npc") {
                 dmgBonus = this.data.data.skillBoostsDamage
