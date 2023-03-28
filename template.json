@@ -459,6 +459,8 @@
       "ab": 0,
       "hardpoint": 1,
       "qualities": "",
+      "traumaDie":"d4",
+      "traumaRating":2,
       "ammo": {
         "type": "none",
         "max": 0,

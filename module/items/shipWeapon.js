@@ -22,14 +22,25 @@ export class SWNRShipWeapon extends SWNRBaseItem {
         const damageRollStr = `${this.data.data.damage} + @statMod`;
         const hitRoll = new Roll(hitRollStr, rollData);
         await hitRoll.roll({ async: true });
-        const damageRoll = new Roll(damageRollStr, rollData);
+
+        let damageRoll = new Roll(damageRollStr, rollData);
+
+        const traumaRoll = new Roll(this.data.data.traumaDie + "+@actor.traumaRb", rollData);
+        await traumaRoll.roll({ async: true });
+
+        if(traumaRoll.total>=6){
+            damageRoll = new Roll("("+this.data.data.damage + "+@statmod)" + "*" + this.data.data.traumaRating, rollData);
+        }
+
         await damageRoll.roll({ async: true });
         const diceTooltip = {
             hit: await hitRoll.render(),
+            trauma: await traumaRoll.render(),
             damage: await damageRoll.render(),
             hitExplain: hitRollStr,
             damageExplain: damageRollStr,
         };
+        
         if (this.data.data.ammo.type !== "none") {
             const newAmmoTotal = this.data.data.ammo.value - 1;
             await this.update({ "data.ammo.value": newAmmoTotal }, {});

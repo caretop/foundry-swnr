@@ -49,6 +49,25 @@
         type="number" step="1" data-dtype="Number" name="data.ab" value="{{data.data.ab}}" />
     </div>
 
+    <!-- Trauma -->
+    <div class="flex flex-col items-center">
+        Trauma Die:
+        <input
+          type="text"
+          class="w-12 px-1.5 py-3 border border-gray-800 bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75 rounded-md"
+          name="data.traumaDie"
+          value="{{data.data.traumaDie}}"
+    </div>
+
+    <div class="flex flex-col items-center">
+      Trauma Rating:
+        <input class="w-8 text-center px-1.5 py-3 border border-gray-800
+        bg-gray-400 bg-opacity-75 placeholder-blue-800 placeholder-opacity-75
+        rounded-md" type="number" name="data.traumaRating" value="{{data.data.traumaRating}}"
+        min="2" step="1" {{#if (lte data.data.traumaRating 0)}} disabled {{/if}}>
+    </div>
+
+
     <div class="flex flex-wrap gap-1">
       <h3 class="text-base w-full">{{localize 'swnr.weapon.ammo'}}:</h3>
       <div>

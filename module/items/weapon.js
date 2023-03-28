@@ -112,7 +112,7 @@ export class SWNRWeapon extends SWNRBaseItem {
         const diceData = Roll.fromTerms([PoolTerm.fromRolls(rollArray)]);
         if (this.data.data.ammo.type !== "none" &&
             this.data.data.ammo.type !== "infinite") {
-            const newAmmoTotal = this.data.data.ammo.value - 1 - (burstFire + 2);
+            const newAmmoTotal = this.data.data.ammo.value - 1 - (burstFire ? burstFire + 2 : 0 );
             await this.update({ "data.ammo.value": newAmmoTotal }, {});
             if (newAmmoTotal === 0)
                 (_g = ui.notifications) === null || _g === void 0 ? void 0 : _g.warn(`Your ${this.name} is now out of ammo!`);
